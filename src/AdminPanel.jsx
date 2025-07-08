@@ -107,6 +107,12 @@ function AdminPanel() {
               media: { ...newTimeline[idx].media, src: url }
             };
             setTimelineDraft(newTimeline);
+          } else if (fieldParts.length === 2 && fieldParts[0] === 'music') {
+            // Müzik için dosya yüklenince src alanını güncelle
+            const idx = Number(fieldParts[1]);
+            const newMusic = [...musicDraft];
+            newMusic[idx] = { ...newMusic[idx], src: url };
+            setMusicDraft(newMusic);
           } else if (fieldParts.length === 2 && fieldParts[0] !== 'gallery' && fieldParts[0] !== 'timeline') {
             const newContent = { ...content };
             newContent[field] = url;
