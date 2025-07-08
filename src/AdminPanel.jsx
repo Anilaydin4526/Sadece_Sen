@@ -99,14 +99,16 @@ function AdminPanel() {
             }
             setGalleryDraft(newGallery);
           } else if (fieldParts.length === 3 && fieldParts[0] === 'timeline' && fieldParts[2] === 'media.src') {
-            // Zaman tüneli için doğrudan timelineDraft güncelle
+            // Zaman tüneli için dosya tipi otomatik güncelle (galeri ve müzik ile aynı mantık)
             const idx = Number(fieldParts[1]);
-            const newTimeline = [...timelineDraft];
-            newTimeline[idx] = {
-              ...newTimeline[idx],
-              media: { ...(newTimeline[idx].media || {}), src: url }
-            };
-            setTimelineDraft(newTimeline);
+            setTimelineDraft(prev => {
+              const newTimeline = [...prev];
+              newTimeline[idx] = {
+                ...newTimeline[idx],
+                media: { ...(newTimeline[idx].media || {}), src: url }
+              };
+              return newTimeline;
+            });
           } else if (fieldParts.length === 2 && fieldParts[0] === 'music') {
             // Müzik için dosya yüklenince src alanını güncelle
             const idx = Number(fieldParts[1]);
