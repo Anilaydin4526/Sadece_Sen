@@ -104,7 +104,7 @@ function AdminPanel() {
             const newTimeline = [...timelineDraft];
             newTimeline[idx] = {
               ...newTimeline[idx],
-              media: { ...newTimeline[idx].media, src: url }
+              media: { ...(newTimeline[idx].media || {}), src: url }
             };
             setTimelineDraft(newTimeline);
           } else if (fieldParts.length === 2 && fieldParts[0] === 'music') {
